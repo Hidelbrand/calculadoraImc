@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import styles from './App.module.css'
-import powerImage from './assents/powered.png'
-import {levels, calcularImc} from './helpers/imc'
+import styles from './App.module.css';
+import powerImage from './assents/powered.png';
+import {levels, calcularImc} from './helpers/imc';
+import { GridItem } from './components/GridItem/GridItem';
 
 const App = () => {
 const [heightField, setHeightField] = useState<number>(0);
@@ -32,8 +33,7 @@ const handleCalculateButton = () => {
           placeholder='Digite a sua altura. Ex 1.5 (em métros)'
           value={heightField > 0 ? heightField : ''}
           onChange={e => setHeightField(parseFloat(e.target.value))} />
-
-<input 
+          <input 
           type="number"
           placeholder='Digite o seu peso. Ex 71.5 (em kg)'
           value={weightField > 0 ? weightField : ''}
@@ -42,7 +42,11 @@ const handleCalculateButton = () => {
           <button onClick={handleCalculateButton}>Calcular</button>
         </div>
         <div className={styles.rightSide}>
-          ...
+          <div className={styles.grid}>
+            {levels.map((item, key)=>(
+              <GridItem key={key} item={item}/>
+            ))}
+          </div>
         </div>
     </div>
     </div>
